@@ -1,9 +1,11 @@
 import 'dart:convert';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:renat_crypto_project/firebase_options.dart';
+import 'package:web_socket_channel/io.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
+// ignore: directives_ordering
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,16 +37,28 @@ class _HomePageState extends State<HomePage> {
   String priceEth = '';
   String priceTon = '';
 
-  final channelBtc = WebSocketChannel.connect(
-    Uri.parse('wss://stream.binance.com:9443/ws/btcusdt@trade'),
-  );
-  final channelEth = WebSocketChannel.connect(
-    Uri.parse('wss://stream.binance.com:9443/ws/ethusdt@trade'),
-  );
+  final channelBtc = kIsWeb
+      ? WebSocketChannel.connect(
+          Uri.parse('wss://stream.binance.com:9443/ws/btcusdt@trade'),
+        )
+      : IOWebSocketChannel.connect(
+          'wss://stream.binance.com:9443/ws/btcusdt@trade',
+        );
+  final channelEth = kIsWeb
+      ? WebSocketChannel.connect(
+          Uri.parse('wss://stream.binance.com:9443/ws/ethusdt@trade'),
+        )
+      : IOWebSocketChannel.connect(
+          'wss://stream.binance.com:9443/ws/ethusdt@trade',
+        );
 
-  final channelTon = WebSocketChannel.connect(
-    Uri.parse('wss://stream.binance.com:9443/ws/tonusdt@trade'),
-  );
+  final channelTon = kIsWeb
+      ? WebSocketChannel.connect(
+          Uri.parse('wss://stream.binance.com:9443/ws/tonusdt@trade'),
+        )
+      : IOWebSocketChannel.connect(
+          'wss://stream.binance.com:9443/ws/tonusdt@trade',
+        );
 
   void listenBinanceStreams() {
     channelBtc.stream.listen((message) {
