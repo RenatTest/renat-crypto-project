@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "333165022104",
+    "project_id": "renat-crypto-project",
+    "storage_bucket": "renat-crypto-project.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:333165022104:android:ed1707f6d687b6db02f9ed",
+        "android_client_info": {
+          "package_name": "com.example.renat_crypto_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxEEbbji3YoY4j5WrHTKczSHZ3bG-cjWs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
