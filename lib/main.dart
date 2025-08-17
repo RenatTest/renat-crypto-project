@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:renat_crypto_project/pages/home_page.dart';
+import 'package:renat_crypto_project/router/app_router.dart';
 import 'package:renat_crypto_project/utils/firebase_options.dart';
 
 void main() async {
@@ -14,9 +14,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      home: const HomePage(),
+      routerConfig: router,
     );
   }
 }
