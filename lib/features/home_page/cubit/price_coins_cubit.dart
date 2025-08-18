@@ -1,71 +1,33 @@
-import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
+import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:renat_crypto_project/features/home_page/cubit/price_coins_cubit_state.dart';
-import 'package:web_socket_channel/io.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
+import 'package:renat_crypto_project/features/home_page/cubit/price_coins_repository.dart';
 
 class PriceCoinsCubit extends Cubit<PriceCoinsCubitState> {
-  PriceCoinsCubit()
+  PriceCoinsCubit(this._priceCoinsRepository)
     : super(
         const PriceCoinsCubitState(btcPrice: '', ethPrice: '', tonPrice: ''),
       ) {
-    _channelBtc = kIsWeb
-        ? WebSocketChannel.connect(
-            Uri.parse('wss://stream.binance.com:9443/ws/btcusdt@trade'),
-          )
-        : IOWebSocketChannel.connect(
-            'wss://stream.binance.com:9443/ws/btcusdt@trade',
-          );
-
-    _channelEth = kIsWeb
-        ? WebSocketChannel.connect(
-            Uri.parse('wss://stream.binance.com:9443/ws/ethusdt@trade'),
-          )
-        : IOWebSocketChannel.connect(
-            'wss://stream.binance.com:9443/ws/ethusdt@trade',
-          );
-
-    _channelTon = kIsWeb
-        ? WebSocketChannel.connect(
-            Uri.parse('wss://stream.binance.com:9443/ws/tonusdt@trade'),
-          )
-        : IOWebSocketChannel.connect(
-            'wss://stream.binance.com:9443/ws/tonusdt@trade',
-          );
-
-    _listenStreams();
+    _subscriptions = [
+      _priceCoinsRepository.btcPrice.listen((price) {
+        emit(state.copyWith(btcPrice: price));
+      }),
+      _priceCoinsRepository.ethPrice.listen((price) {
+        emit(state.copyWith(ethPrice: price));
+      }),
+      _priceCoinsRepository.tonPrice.listen((price) {
+        emit(state.copyWith(tonPrice: price));
+      }),
+    ];
   }
-  late final WebSocketChannel _channelBtc;
-  late final WebSocketChannel _channelEth;
-  late final WebSocketChannel _channelTon;
-
-  void _listenStreams() {
-    _channelBtc.stream.listen((message) {
-      final data = jsonDecode(message.toString());
-      final price = double.parse(data['p'].toString()).toStringAsFixed(2);
-      emit(state.copyWith(btcPrice: price));
-    });
-
-    _channelEth.stream.listen((message) {
-      final data = jsonDecode(message.toString());
-      final price = double.parse(data['p'].toString()).toStringAsFixed(2);
-      emit(state.copyWith(ethPrice: price));
-    });
-
-    _channelTon.stream.listen((message) {
-      final data = jsonDecode(message.toString());
-      final price = double.parse(data['p'].toString()).toStringAsFixed(3);
-      emit(state.copyWith(tonPrice: price));
-    });
-  }
+  final PriceCoinsRepository _priceCoinsRepository;
+  late final List<StreamSubscription<String>> _subscriptions;
 
   @override
-  Future<void> close() {
-    _channelBtc.sink.close();
-    _channelEth.sink.close();
-    _channelTon.sink.close();
+  Future<void> close() async {
+    for (final sub in _subscriptions) {
+      await sub.cancel();
+    }
     return super.close();
   }
 }
