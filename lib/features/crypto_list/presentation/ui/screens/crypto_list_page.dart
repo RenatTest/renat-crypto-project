@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -33,74 +34,81 @@ class CryptoListPage extends StatelessWidget {
               ),
 
               CryptoListStatus.loaded => Center(
-                child: Column(
-                  spacing: 10,
-                  children: [
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: state.cryptoList?.cryptoList?.length,
-                        itemBuilder: (context, index) {
-                          final coin =
-                              state.cryptoList?.cryptoList?[index]['coin']
-                                  .toString() ??
-                              'Coin';
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: kIsWeb ? 400 : double.infinity,
+                  ),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: state.cryptoList?.cryptoList?.length,
+                          itemBuilder: (context, index) {
+                            final coin =
+                                state.cryptoList?.cryptoList?[index]['coin']
+                                    .toString() ??
+                                'Coin';
 
-                          final price =
-                              state.cryptoList?.cryptoList?[index]['price']
-                                  .toStringAsFixed(5)
-                                  .toString() ??
-                              '0';
+                            final price =
+                                state.cryptoList?.cryptoList?[index]['price']
+                                    .toStringAsFixed(5)
+                                    .toString() ??
+                                '0';
 
-                          final coinImage =
-                              state.cryptoList?.cryptoList?[index]['coinImage']
-                                  .toString() ??
-                              'Coin image';
+                            final coinImage =
+                                state
+                                    .cryptoList
+                                    ?.cryptoList?[index]['coinImage']
+                                    .toString() ??
+                                'Coin image';
 
-                          return Card(
-                            color: Colors.grey,
-                            elevation: 4,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            margin: const EdgeInsets.all(10),
-                            child: ListTile(
-                              subtitle: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                spacing: 10,
-                                children: [
-                                  Image.network(height: 85, coinImage),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        coin,
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                      Text(
-                                        '$price \$',
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                            return Card(
+                              color: Colors.grey,
+                              elevation: 4,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
                               ),
-                            ),
-                          );
-                        },
+                              margin: const EdgeInsets.all(10),
+                              child: ListTile(
+                                subtitle: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  spacing: 10,
+                                  children: [
+                                    Image.network(height: 85, coinImage),
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          coin,
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        Text(
+                                          '$price \$',
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
 

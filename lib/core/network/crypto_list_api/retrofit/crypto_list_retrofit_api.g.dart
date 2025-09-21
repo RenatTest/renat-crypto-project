@@ -23,7 +23,8 @@ class _CryptoListApiImplRetrofit implements CryptoListApiImplRetrofit {
 
   @override
   Future<CryptoListDto> getCryptoList({
-    String? fsyms = 'BTC,ETH,BNB,HMSTR,TON,DOGE,USDT,SOL',
+    String? fsyms =
+        'BTC,ETH,USDT,BNB,SOL,XRP,ADA,DOGE,DOT,MATIC,TRX,LTC,AVAX,SHIB,WBTC,LINK,UNI,BUSD,ICP,NEAR,HBAR,APE,FTM,XLM,VET,SAND,EOS,FIL,CHZ,AXS',
     String? tsyms = 'USD',
   }) async {
     final _extra = <String, dynamic>{};
