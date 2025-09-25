@@ -18,7 +18,7 @@ abstract class CryptoListApiImplRetrofit implements CryptoListApi {
     // @Query('fsyms') String? fsyms = 'BTC,ETH,BNB,HMSTR,TON,DOGE,USDT,SOL',
     @Query('fsyms')
     String? fsyms =
-        'BTC,ETH,USDT,BNB,SOL,XRP,ADA,DOGE,DOT,MATIC,TRX,LTC,AVAX,SHIB,WBTC,LINK,UNI,BUSD,ICP,NEAR,HBAR,APE,FTM,XLM,VET,SAND,EOS,FIL,CHZ,AXS',
+        'BTC,ETH,TON,USDT,BNB,SOL,XRP,ADA,DOGE,DOT,MATIC,TRX,LTC,AVAX,SHIB,WBTC,LINK,UNI,BUSD,ICP,NEAR,HBAR,APE,FTM,XLM,VET,SAND,EOS,FIL,CHZ,AXS',
     @Query('tsyms') String? tsyms = 'USD',
   });
 }

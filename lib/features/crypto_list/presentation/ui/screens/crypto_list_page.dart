@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:renat_crypto_project/features/crypto_list/presentation/cubit/crypto_list_cubit.dart';
 import 'package:renat_crypto_project/features/crypto_list/presentation/cubit/crypto_list_state.dart';
+import 'package:renat_crypto_project/features/crypto_list/presentation/ui/widgets/crypto_coin_card.dart';
 
 class CryptoListPage extends StatelessWidget {
   const CryptoListPage({super.key});
@@ -55,54 +56,17 @@ class CryptoListPage extends StatelessWidget {
                                     .toString() ??
                                 '0';
 
-                            final coinImage =
+                            final image =
                                 state
                                     .cryptoList
                                     ?.cryptoList?[index]['coinImage']
                                     .toString() ??
                                 'Coin image';
 
-                            return Card(
-                              color: Colors.grey,
-                              elevation: 4,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              margin: const EdgeInsets.all(10),
-                              child: ListTile(
-                                subtitle: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  spacing: 10,
-                                  children: [
-                                    Image.network(height: 85, coinImage),
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          coin,
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                        Text(
-                                          '$price \$',
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
+                            return CryptoCoinCard(
+                              coinName: coin,
+                              coinPrice: price,
+                              coinImage: image,
                             );
                           },
                         ),
