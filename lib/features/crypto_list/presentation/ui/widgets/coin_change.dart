@@ -8,7 +8,7 @@ class CoinChange extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 100,
+      width: 85,
       height: 40,
       decoration: BoxDecoration(
         color: double.parse(coinText) > 0 ? Colors.green : Colors.red,
@@ -16,9 +16,9 @@ class CoinChange extends StatelessWidget {
       ),
       alignment: Alignment.center,
       child: Text(
-        '$coinText %',
+        double.parse(coinText) > 0 ? '+$coinText%' : '$coinText%',
         style: TextStyle(
-          fontSize: 20,
+          fontSize: 18,
           fontWeight: FontWeight.bold,
           color: Colors.white,
         ),
