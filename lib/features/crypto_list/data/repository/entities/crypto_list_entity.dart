@@ -9,6 +9,7 @@ class CryptoListEntity {
         return {
           'coin': item.value.usd?.fromsymbol,
           'price': item.value.usd?.price,
+          'priceOpen24Hour': item.value.usd?.open24Hour,
           'coinImage':
               'https://www.cryptocompare.com/${item.value.usd?.imageurl}',
         };

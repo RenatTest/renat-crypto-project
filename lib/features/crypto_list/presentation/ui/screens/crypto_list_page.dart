@@ -1,3 +1,5 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -63,10 +65,23 @@ class CryptoListPage extends StatelessWidget {
                                     .toString() ??
                                 'Coin image';
 
+                            final changePrice =
+                                (((state.cryptoList?.cryptoList?[index]['price'] -
+                                                state
+                                                    .cryptoList
+                                                    ?.cryptoList?[index]['priceOpen24Hour']) /
+                                            state
+                                                .cryptoList
+                                                ?.cryptoList?[index]['priceOpen24Hour']) *
+                                        100)
+                                    .toStringAsFixed(2)
+                                    .toString();
+
                             return CryptoCoinCard(
                               coinName: coin,
                               coinPrice: price,
                               coinImage: image,
+                              coinChange: changePrice,
                             );
                           },
                         ),

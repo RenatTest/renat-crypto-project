@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:renat_crypto_project/features/crypto_list/presentation/ui/widgets/coin_change.dart';
 import 'package:renat_crypto_project/features/crypto_list/presentation/ui/widgets/coin_text.dart';
 
 class CryptoCoinCard extends StatelessWidget {
@@ -6,12 +7,14 @@ class CryptoCoinCard extends StatelessWidget {
     required this.coinName,
     required this.coinPrice,
     required this.coinImage,
+    required this.coinChange,
     super.key,
   });
 
   final String coinName;
   final String coinPrice;
   final String coinImage;
+  final String coinChange;
 
   @override
   Widget build(BuildContext context) {
@@ -22,19 +25,23 @@ class CryptoCoinCard extends StatelessWidget {
       margin: const EdgeInsets.all(10),
       child: ListTile(
         subtitle: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
-          spacing: 10,
           children: [
-            Image.network(height: 85, coinImage),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Row(
               children: [
-                CoinText(coinText: coinName),
-                CoinText(coinText: '$coinPrice \$'),
+                Image.network(height: 85, coinImage),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CoinText(coinText: coinName),
+                    CoinText(coinText: '$coinPrice \$'),
+                  ],
+                ),
               ],
             ),
+            CoinChange(coinText: coinChange),
           ],
         ),
       ),
