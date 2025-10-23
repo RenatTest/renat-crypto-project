@@ -2,8 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:renat_crypto_project/di/di.dart';
-import 'package:renat_crypto_project/features/home_page/cubit/price_coins_cubit.dart';
-import 'package:renat_crypto_project/features/home_page/cubit/price_coins_repository.dart';
+import 'package:renat_crypto_project/features/home_page/presentation/cubit/price_coins_cubit.dart';
+import 'package:renat_crypto_project/features/home_page/presentation/cubit/price_coins_repository.dart';
 import 'package:renat_crypto_project/router/app_router.dart';
 import 'package:renat_crypto_project/utils/firebase_options.dart';
 

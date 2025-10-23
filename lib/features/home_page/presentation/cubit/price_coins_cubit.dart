@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:renat_crypto_project/features/home_page/cubit/price_coins_cubit_state.dart';
-import 'package:renat_crypto_project/features/home_page/cubit/price_coins_repository.dart';
+import 'package:renat_crypto_project/features/home_page/presentation/cubit/price_coins_cubit_state.dart';
+import 'package:renat_crypto_project/features/home_page/presentation/cubit/price_coins_repository.dart';
 
 class PriceCoinsCubit extends Cubit<PriceCoinsCubitState> {
   PriceCoinsCubit(this._priceCoinsRepository)

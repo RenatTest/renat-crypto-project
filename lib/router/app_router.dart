@@ -5,7 +5,8 @@ import 'package:renat_crypto_project/features/app/page_names.dart';
 import 'package:renat_crypto_project/features/crypto_list/data/repository/crypto_list_repository.dart';
 import 'package:renat_crypto_project/features/crypto_list/presentation/cubit/crypto_list_cubit.dart';
 import 'package:renat_crypto_project/features/crypto_list/presentation/ui/screens/crypto_list_page.dart';
-import 'package:renat_crypto_project/features/home_page/home_page.dart';
+import 'package:renat_crypto_project/features/crypto_resourses/presentation/ui/screens/crypto_resourses_page.dart';
+import 'package:renat_crypto_project/features/home_page/presentation/ui/screens/home_page.dart';
 
 final router = GoRouter(
   routes: [
@@ -23,6 +24,11 @@ final router = GoRouter(
                   ..getCryptoList(),
             child: const CryptoListPage(),
           ),
+        ),
+        GoRoute(
+          path: 'crypto-resourses-page',
+          name: ScreenNames.cryptoResoursesPage,
+          builder: (context, state) => CryptoResoursesPage(),
         ),
       ],
     ),
