@@ -32,7 +32,7 @@ class CryptoText extends StatelessWidget {
                 child: CircularProgressIndicator(color: color),
               )
             : Text(
-                '$value ',
+                value,
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.w600,
@@ -40,7 +40,7 @@ class CryptoText extends StatelessWidget {
                 ),
               ),
         Text(
-          '\$',
+          ' \$',
           style: TextStyle(
             fontSize: 22,
             fontWeight: FontWeight.w600,

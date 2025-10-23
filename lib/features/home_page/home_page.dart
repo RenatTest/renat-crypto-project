@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:renat_crypto_project/features/app/page_names.dart';
 import 'package:renat_crypto_project/features/home_page/cubit/price_coins_cubit.dart';
 import 'package:renat_crypto_project/features/home_page/cubit/price_coins_cubit_state.dart';
 import 'package:renat_crypto_project/widgets/crypto_text.dart';
@@ -40,6 +42,25 @@ class HomePage extends StatelessWidget {
                   coin: 'TON: ',
                   value: state.tonPrice,
                   color: Colors.lightBlueAccent,
+                ),
+                ElevatedButton(
+                  onPressed: () => context.goNamed(ScreenNames.cryptoListPage),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.transparent,
+                    shadowColor: Colors.transparent,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    side: BorderSide(width: 2.0, color: Colors.white),
+                  ),
+                  child: const Text(
+                    'Show crypto list',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               ],
             );
