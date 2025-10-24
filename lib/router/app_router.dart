@@ -5,7 +5,10 @@ import 'package:renat_crypto_project/features/app/page_names.dart';
 import 'package:renat_crypto_project/features/crypto_list/data/repository/crypto_list_repository.dart';
 import 'package:renat_crypto_project/features/crypto_list/presentation/cubit/crypto_list_cubit.dart';
 import 'package:renat_crypto_project/features/crypto_list/presentation/ui/screens/crypto_list_page.dart';
-import 'package:renat_crypto_project/features/crypto_resourses/presentation/ui/screens/crypto_resourses_page.dart';
+import 'package:renat_crypto_project/features/crypto_resources/data/repository/crypto_resources_repository.dart';
+import 'package:renat_crypto_project/features/crypto_resources/presentation/bloc/crypto_resources_bloc.dart';
+import 'package:renat_crypto_project/features/crypto_resources/presentation/bloc/crypto_resources_event.dart';
+import 'package:renat_crypto_project/features/crypto_resources/presentation/ui/screens/crypto_resources_page.dart';
 import 'package:renat_crypto_project/features/home_page/presentation/ui/screens/home_page.dart';
 
 final router = GoRouter(
@@ -26,9 +29,14 @@ final router = GoRouter(
           ),
         ),
         GoRoute(
-          path: 'crypto-resourses-page',
-          name: ScreenNames.cryptoResoursesPage,
-          builder: (context, state) => CryptoResoursesPage(),
+          path: 'crypto-resources-page',
+          name: ScreenNames.cryptoResourcesPage,
+          builder: (context, state) => BlocProvider(
+            create: (context) =>
+                CryptoResourcesBloc(getIt.get<CryptoResourcesRepository>())
+                  ..add(CryptoResourcesEventLoad()),
+            child: const CryptoResourcesPage(),
+          ),
         ),
       ],
     ),
