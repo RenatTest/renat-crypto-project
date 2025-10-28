@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:renat_crypto_project/features/crypto_resources/presentation/bloc/crypto_resources_bloc.dart';
 import 'package:renat_crypto_project/features/crypto_resources/presentation/bloc/crypto_resources_state.dart';
+import 'package:renat_crypto_project/features/crypto_resources/presentation/ui/widgets/crypto_resources_item.dart';
 
 class CryptoResourcesPage extends StatelessWidget {
   const CryptoResourcesPage({super.key});
@@ -47,7 +48,7 @@ class CryptoResourcesPage extends StatelessWidget {
             if (state.cryptoResources.isEmpty) {
               return Center(
                 child: Text(
-                  'No crypto resources loaded',
+                  'No crypto resources found',
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: 24,
@@ -65,56 +66,19 @@ class CryptoResourcesPage extends StatelessWidget {
                   physics: BouncingScrollPhysics(),
                   itemCount: state.cryptoResources.length,
                   itemBuilder: (context, index) {
-                    return Card(
-                      color: Colors.grey,
-                      elevation: 4,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      margin: const EdgeInsets.all(10),
-                      child: ListTile(
-                        subtitle: Column(
-                          spacing: 10,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              state.cryptoResources[index]['title']
-                                      ?.toString() ??
-                                  '',
-                              maxLines: 2,
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontFamily: 'Arial',
-                                fontWeight: FontWeight.w600,
-                                color: Colors.white,
-                              ),
-                            ),
-                            Text(
-                              state.cryptoResources[index]['description']
-                                      ?.toString() ??
-                                  '',
-                              style: const TextStyle(
-                                fontSize: 14,
-                                fontFamily: 'Arial',
-                                fontWeight: FontWeight.w400,
-                                color: Colors.white,
-                              ),
-                            ),
-                            Text(
-                              state.cryptoResources[index]['link']
-                                      ?.toString() ??
-                                  '',
-                              style: const TextStyle(
-                                fontSize: 14,
-                                fontFamily: 'Arial',
-                                fontWeight: FontWeight.w400,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                    final title =
+                        state.cryptoResources[index]['title']?.toString() ?? '';
+                    final description =
+                        state.cryptoResources[index]['description']
+                            ?.toString() ??
+                        '';
+                    final link =
+                        state.cryptoResources[index]['link']?.toString() ?? '';
+
+                    return CryptoResourcesItem(
+                      title: title,
+                      description: description,
+                      link: link,
                     );
                   },
                 ),
