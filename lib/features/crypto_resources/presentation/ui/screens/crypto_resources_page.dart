@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:renat_crypto_project/features/crypto_resources/presentation/bloc/crypto_resources_bloc.dart';
+import 'package:renat_crypto_project/features/crypto_resources/presentation/bloc/crypto_resources_event.dart';
 import 'package:renat_crypto_project/features/crypto_resources/presentation/bloc/crypto_resources_state.dart';
 import 'package:renat_crypto_project/features/crypto_resources/presentation/ui/widgets/crypto_resources_item.dart';
 
@@ -23,6 +24,14 @@ class CryptoResourcesPage extends StatelessWidget {
           icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => context.pop(),
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.refresh, color: Colors.white),
+            onPressed: () => context.read<CryptoResourcesBloc>().add(
+              CryptoResourcesEventLoad(),
+            ),
+          ),
+        ],
       ),
       body: BlocBuilder<CryptoResourcesBloc, CryptoResourcesState>(
         builder: (context, state) {

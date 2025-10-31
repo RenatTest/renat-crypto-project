@@ -9,9 +9,7 @@ class CryptoResourcesBloc
     : super(CryptoResourcesStateInitial()) {
     on<CryptoResourcesEventLoad>((event, emit) async {
       try {
-        if (state is! CryptoResourcesStateLoaded) {
-          emit(CryptoResourcesStateLoading());
-        }
+        emit(CryptoResourcesStateLoading());
         final cryptoResources = await cryptoResourcesRepository
             .getCryptoResources();
         emit(CryptoResourcesStateLoaded(cryptoResources: cryptoResources));
