@@ -2,6 +2,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:renat_crypto_project/di/di.dart';
 import 'package:renat_crypto_project/features/app/page_names.dart';
+import 'package:renat_crypto_project/features/crypto_exchanges/data/repository/crypto_exchanges_repository.dart';
+import 'package:renat_crypto_project/features/crypto_exchanges/presentation/bloc/crypto_exchanges_bloc.dart';
+import 'package:renat_crypto_project/features/crypto_exchanges/presentation/bloc/crypto_exchanges_event.dart';
 import 'package:renat_crypto_project/features/crypto_exchanges/presentation/ui/screens/crypto_exchanges_page.dart';
 import 'package:renat_crypto_project/features/crypto_list/data/repository/crypto_list_repository.dart';
 import 'package:renat_crypto_project/features/crypto_list/presentation/cubit/crypto_list_cubit.dart';
@@ -42,7 +45,12 @@ final router = GoRouter(
         GoRoute(
           path: 'crypto-exchanges-page',
           name: ScreenNames.cryptoExchangesPage,
-          builder: (context, state) => const CryptoExchangesPage(),
+          builder: (context, state) => BlocProvider(
+            create: (context) =>
+                CryptoExchangesBloc(getIt.get<CryptoExchangesRepository>())
+                  ..add(CryptoExchangesEventLoaded()),
+            child: const CryptoExchangesPage(),
+          ),
         ),
       ],
     ),

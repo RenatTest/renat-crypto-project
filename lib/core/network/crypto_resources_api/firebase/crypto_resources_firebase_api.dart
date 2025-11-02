@@ -3,7 +3,7 @@ import 'package:renat_crypto_project/core/network/crypto_list_api/http/crypto_li
 import 'package:renat_crypto_project/core/network/crypto_resources_api/crypto_resourses_api_base.dart';
 import 'package:renat_crypto_project/features/crypto_resources/data/data_source/models/crypto_resources_dto/crypto_resources_dto.dart';
 
-class CryptoResourceApiImpl implements CryptoResourcesApi {
+class CryptoResourceFirebaseApi implements CryptoResourcesApi {
   @override
   Future<List<CryptoResourcesDto>> getCryptoResources() async {
     var cryptoResources = <CryptoResourcesDto>[];
