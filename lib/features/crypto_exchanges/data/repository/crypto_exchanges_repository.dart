@@ -2,7 +2,7 @@ import 'package:renat_crypto_project/features/crypto_exchanges/data/data_source/
 import 'package:renat_crypto_project/features/crypto_exchanges/data/repository/entities/crypto_exchanges_entity.dart';
 
 abstract interface class CryptoExchangesRepository {
-  Stream<List<Map<String, dynamic>>> getCryptoExchanges();
+  Stream<List<CryptoExchangesEntity>> getCryptoExchanges();
 }
 
 class CryptoExchangesRepositoryImpl implements CryptoExchangesRepository {
@@ -10,10 +10,9 @@ class CryptoExchangesRepositoryImpl implements CryptoExchangesRepository {
   final CryptoExchangesDataSource dataSource;
 
   @override
-  Stream<List<Map<String, dynamic>>> getCryptoExchanges() {
+  Stream<List<CryptoExchangesEntity>> getCryptoExchanges() {
     return dataSource.getCryptoExchanges().map((dtoList) {
-      final entity = CryptoExchangesEntity.fromDTO(dtoList);
-      return entity.cryptoExchanges;
+      return dtoList.map(CryptoExchangesEntity.fromDTO).toList();
     });
   }
 }

@@ -1,20 +1,23 @@
 import 'package:renat_crypto_project/features/crypto_exchanges/data/data_source/models/crypto_exchanges_dto.dart';
 
 class CryptoExchangesEntity {
-  CryptoExchangesEntity({required this.cryptoExchanges});
+  const CryptoExchangesEntity({
+    required this.title,
+    required this.info,
+    required this.link,
+    required this.logo,
+  });
 
-  factory CryptoExchangesEntity.fromDTO(List<CryptoExchangesDto> dto) {
+  factory CryptoExchangesEntity.fromDTO(CryptoExchangesDto dto) {
     return CryptoExchangesEntity(
-      cryptoExchanges: dto.map((dto) {
-        return {
-          'title': dto.title,
-          'info': dto.info,
-          'link': dto.link,
-          'logo': dto.logo,
-        };
-      }).toList(),
+      title: dto.title,
+      info: dto.info,
+      link: dto.link,
+      logo: dto.logo,
     );
   }
-
-  final List<Map<String, dynamic>> cryptoExchanges;
+  final String title;
+  final String info;
+  final String link;
+  final String logo;
 }

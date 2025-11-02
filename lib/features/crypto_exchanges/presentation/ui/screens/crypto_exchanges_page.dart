@@ -63,14 +63,10 @@ class CryptoExchangesPage extends StatelessWidget {
                   physics: BouncingScrollPhysics(),
                   itemCount: state.cryptoExchanges.length,
                   itemBuilder: (context, index) {
-                    final title =
-                        state.cryptoExchanges[index]['title']?.toString() ?? '';
-                    final info =
-                        state.cryptoExchanges[index]['info']?.toString() ?? '';
-                    final link =
-                        state.cryptoExchanges[index]['link']?.toString() ?? '';
-                    final logo =
-                        state.cryptoExchanges[index]['logo']?.toString() ?? '';
+                    final title = state.cryptoExchanges[index].title;
+                    final info = state.cryptoExchanges[index].info;
+                    final link = state.cryptoExchanges[index].link;
+                    final logo = state.cryptoExchanges[index].logo;
 
                     return Center(
                       child: Text(title, style: TextStyle(color: Colors.white)),
