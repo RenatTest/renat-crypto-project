@@ -2,7 +2,7 @@ import 'package:renat_crypto_project/features/crypto_resources/data/data_source/
 import 'package:renat_crypto_project/features/crypto_resources/data/repository/entities/crypto_resources_entity.dart';
 
 abstract interface class CryptoResourcesRepository {
-  Future<List<Map<String, dynamic>>> getCryptoResources();
+  Future<List<CryptoResourcesEntity>> getCryptoResources();
 }
 
 class CryptoResourcesRepositoryImpl implements CryptoResourcesRepository {
@@ -11,10 +11,8 @@ class CryptoResourcesRepositoryImpl implements CryptoResourcesRepository {
   final CryptoResourcesDataSource dataSource;
 
   @override
-  Future<List<Map<String, dynamic>>> getCryptoResources() async {
+  Future<List<CryptoResourcesEntity>> getCryptoResources() async {
     final response = await dataSource.getCryptoResources();
-    final entity = CryptoResourcesEntity.fromDTOList(response);
-
-    return entity.cryptoResources;
+    return response.map(CryptoResourcesEntity.fromDTO).toList();
   }
 }

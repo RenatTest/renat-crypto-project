@@ -75,14 +75,10 @@ class CryptoResourcesPage extends StatelessWidget {
                   physics: BouncingScrollPhysics(),
                   itemCount: state.cryptoResources.length,
                   itemBuilder: (context, index) {
-                    final title =
-                        state.cryptoResources[index]['title']?.toString() ?? '';
+                    final title = state.cryptoResources[index].title;
                     final description =
-                        state.cryptoResources[index]['description']
-                            ?.toString() ??
-                        '';
-                    final link =
-                        state.cryptoResources[index]['link']?.toString() ?? '';
+                        state.cryptoResources[index].description;
+                    final link = state.cryptoResources[index].link;
 
                     return CryptoResourcesItem(
                       title: title,
