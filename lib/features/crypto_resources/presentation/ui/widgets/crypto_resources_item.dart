@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:renat_crypto_project/features/crypto_resources/presentation/ui/widgets/crypto_resources_item_text.dart';
+import 'package:renat_crypto_project/features/crypto_resources/presentation/ui/widgets/crypto_resources_item_text_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CryptoResourcesItem extends StatelessWidget {
@@ -33,37 +35,11 @@ class CryptoResourcesItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 18,
-                fontFamily: 'Arial',
-                fontWeight: FontWeight.w600,
-                color: Colors.white,
-              ),
-            ),
-            Text(
-              description,
-              style: const TextStyle(
-                fontSize: 14,
-                fontFamily: 'Arial',
-                fontWeight: FontWeight.w400,
-                color: Colors.white,
-              ),
-            ),
-            GestureDetector(
-              onTap: () => _openLink(link),
-              child: Text(
-                link,
-                style: const TextStyle(
-                  fontSize: 14,
-                  fontFamily: 'Arial',
-                  fontWeight: FontWeight.w400,
-                  color: Colors.white,
-                  decoration: TextDecoration.underline,
-                  decorationColor: Colors.white,
-                ),
-              ),
+            CryptoResourcesItemText(text: title, size: 18),
+            CryptoResourcesItemText(text: description, size: 14),
+            CryptoResourcesItemTextButton(
+              buttonText: link,
+              onPressed: () => _openLink(link),
             ),
           ],
         ),

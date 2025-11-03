@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:renat_crypto_project/features/crypto_resources/presentation/bloc/crypto_resources_bloc.dart';
 import 'package:renat_crypto_project/features/crypto_resources/presentation/bloc/crypto_resources_event.dart';
 import 'package:renat_crypto_project/features/crypto_resources/presentation/bloc/crypto_resources_state.dart';
+import 'package:renat_crypto_project/features/crypto_resources/presentation/ui/widgets/crypto_resources_exception_text.dart';
 import 'package:renat_crypto_project/features/crypto_resources/presentation/ui/widgets/crypto_resources_item.dart';
 
 class CryptoResourcesPage extends StatelessWidget {
@@ -45,10 +46,8 @@ class CryptoResourcesPage extends StatelessWidget {
           }
           if (state is CryptoResourcesStateError) {
             return Center(
-              child: Text(
-                state.exception.toString(),
-                textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 24, color: Colors.deepOrange),
+              child: CryptoResourcesExceptionText(
+                exceptionText: state.exception.toString(),
               ),
             );
           }
@@ -56,13 +55,8 @@ class CryptoResourcesPage extends StatelessWidget {
           if (state is CryptoResourcesStateLoaded) {
             if (state.cryptoResources.isEmpty) {
               return Center(
-                child: Text(
-                  'No crypto resources found',
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 24,
-                    color: Colors.deepOrange,
-                  ),
+                child: CryptoResourcesExceptionText(
+                  exceptionText: 'No crypto resources found',
                 ),
               );
             }

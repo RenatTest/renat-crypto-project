@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:renat_crypto_project/features/crypto_exchanges/presentation/bloc/crypto_exchanges_bloc.dart';
 import 'package:renat_crypto_project/features/crypto_exchanges/presentation/bloc/crypto_exchanges_state.dart';
+import 'package:renat_crypto_project/features/crypto_exchanges/presentation/ui/widgets/crypto_exchanges_exception_text.dart';
+import 'package:renat_crypto_project/features/crypto_exchanges/presentation/ui/widgets/crypto_exchanges_item.dart';
 
 class CryptoExchangesPage extends StatelessWidget {
   const CryptoExchangesPage({super.key});
@@ -33,10 +35,8 @@ class CryptoExchangesPage extends StatelessWidget {
           }
           if (state is CryptoExchangesStateError) {
             return Center(
-              child: Text(
-                state.exception.toString(),
-                textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 24, color: Colors.deepOrange),
+              child: CryptoExchangesExceptionText(
+                exceptionText: state.exception.toString(),
               ),
             );
           }
@@ -44,13 +44,8 @@ class CryptoExchangesPage extends StatelessWidget {
           if (state is CryptoExchangesStateLoaded) {
             if (state.cryptoExchanges.isEmpty) {
               return Center(
-                child: Text(
-                  'No crypto resources found',
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 24,
-                    color: Colors.deepOrange,
-                  ),
+                child: CryptoExchangesExceptionText(
+                  exceptionText: 'No crypto exchanges found',
                 ),
               );
             }
@@ -68,8 +63,11 @@ class CryptoExchangesPage extends StatelessWidget {
                     final link = state.cryptoExchanges[index].link;
                     final logo = state.cryptoExchanges[index].logo;
 
-                    return Center(
-                      child: Text(title, style: TextStyle(color: Colors.white)),
+                    return CryptoExchangesItem(
+                      title: title,
+                      logo: logo,
+                      info: info,
+                      link: link,
                     );
                   },
                 ),
