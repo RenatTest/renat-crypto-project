@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:renat_crypto_project/di/di.dart';
-import 'package:renat_crypto_project/features/app/page_names.dart';
 import 'package:renat_crypto_project/features/crypto_exchanges/data/repository/crypto_exchanges_repository.dart';
 import 'package:renat_crypto_project/features/crypto_exchanges/presentation/bloc/crypto_exchanges_bloc.dart';
 import 'package:renat_crypto_project/features/crypto_exchanges/presentation/bloc/crypto_exchanges_event.dart';
@@ -14,6 +13,7 @@ import 'package:renat_crypto_project/features/crypto_resources/presentation/bloc
 import 'package:renat_crypto_project/features/crypto_resources/presentation/bloc/crypto_resources_event.dart';
 import 'package:renat_crypto_project/features/crypto_resources/presentation/ui/screens/crypto_resources_page.dart';
 import 'package:renat_crypto_project/features/home_page/presentation/ui/screens/home_page.dart';
+import 'package:renat_crypto_project/router/page_names.dart';
 
 final router = GoRouter(
   routes: [
