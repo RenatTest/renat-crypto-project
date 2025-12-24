@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:renat_crypto_project/features/app/page_names.dart';
 import 'package:renat_crypto_project/features/home_page/presentation/cubit/price_coins_cubit.dart';
 import 'package:renat_crypto_project/features/home_page/presentation/cubit/price_coins_cubit_state.dart';
 import 'package:renat_crypto_project/features/home_page/presentation/ui/widgets/crypto_text.dart';
 import 'package:renat_crypto_project/features/home_page/presentation/ui/widgets/home_page_button.dart';
+import 'package:renat_crypto_project/router/page_names.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -52,6 +52,11 @@ class HomePage extends StatelessWidget {
                   buttonText: 'Crypto Resourses',
                   onPressed: () =>
                       context.goNamed(ScreenNames.cryptoResourcesPage),
+                ),
+                HomePageButton(
+                  buttonText: 'Crypto Exchanges',
+                  onPressed: () =>
+                      context.goNamed(ScreenNames.cryptoExchangesPage),
                 ),
               ],
             );
