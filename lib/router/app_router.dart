@@ -13,6 +13,7 @@ import 'package:renat_crypto_project/features/crypto_resources/presentation/bloc
 import 'package:renat_crypto_project/features/crypto_resources/presentation/bloc/crypto_resources_event.dart';
 import 'package:renat_crypto_project/features/crypto_resources/presentation/ui/screens/crypto_resources_page.dart';
 import 'package:renat_crypto_project/features/home_page/presentation/ui/screens/home_page.dart';
+import 'package:renat_crypto_project/features/models_3d/models_3d_screen.dart';
 import 'package:renat_crypto_project/router/page_names.dart';
 
 final router = GoRouter(
@@ -51,6 +52,11 @@ final router = GoRouter(
                   ..add(CryptoExchangesEventLoaded()),
             child: const CryptoExchangesPage(),
           ),
+        ),
+        GoRoute(
+          path: 'models-3d-page',
+          name: ScreenNames.models3dPage,
+          builder: (context, state) => const Models3dScreen(),
         ),
       ],
     ),
