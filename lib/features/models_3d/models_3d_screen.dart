@@ -17,6 +17,7 @@ class Models3dScreen extends StatelessWidget {
           ar: true,
           autoRotate: true,
           disableZoom: false,
+          iosSrc: 'https://modelviewer.dev/shared-assets/models/Astronaut.usdz',
         ),
       ),
     );
