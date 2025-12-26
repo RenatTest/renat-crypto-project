@@ -54,7 +54,7 @@ class HomePage extends StatelessWidget {
                       context.goNamed(ScreenNames.cryptoResourcesPage),
                 ),
                 HomePageButton(
-                  buttonText: '3d models',
+                  buttonText: '3d models new',
                   onPressed: () => context.goNamed(ScreenNames.models3dPage),
                 ),
               ],
