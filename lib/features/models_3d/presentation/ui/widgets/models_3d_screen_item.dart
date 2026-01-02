@@ -38,11 +38,15 @@ class Models3dScreenItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
             child: CachedNetworkImage(
               imageUrl: image,
-              imageBuilder: (context, imageProvider) => Image.network(
-                image,
-                height: 250,
-                width: 250,
-                fit: BoxFit.cover,
+              imageBuilder: (context, imageProvider) => Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: Colors.white, width: 3.0),
+                  image: DecorationImage(
+                    image: imageProvider,
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
               placeholder: (context, url) => SizedBox(
                 height: 250,
@@ -54,8 +58,13 @@ class Models3dScreenItem extends StatelessWidget {
                   ),
                 ),
               ),
-              errorWidget: (context, url, error) =>
-                  Center(child: Icon(Icons.image)),
+              errorWidget: (context, url, error) => Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: Colors.white, width: 3.0),
+                ),
+                child: Icon(Icons.image, color: Colors.white),
+              ),
             ),
           ),
         ),
