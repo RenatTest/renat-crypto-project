@@ -17,7 +17,7 @@ class Models3dScreen extends StatelessWidget {
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: Text('3D models list', style: TextStyle(color: Colors.white)),
+        title: Text('3D models', style: TextStyle(color: Colors.white)),
         centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.white),
@@ -66,11 +66,13 @@ class Models3dScreen extends StatelessWidget {
                   scrollDirection: isMobile ? Axis.vertical : Axis.horizontal,
                   itemCount: state.models3d.length,
                   itemBuilder: (context, index) {
+                    final name = state.models3d[index].name;
                     final image = state.models3d[index].image;
                     final modelAndroid = state.models3d[index].modelAndroid;
                     final modelIos = state.models3d[index].modelIos;
 
                     return Models3dScreenItem(
+                      name: name,
                       image: image,
                       modelAndroid: modelAndroid,
                       modelIos: modelIos,

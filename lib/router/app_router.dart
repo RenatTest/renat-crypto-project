@@ -71,11 +71,13 @@ final router = GoRouter(
               path: 'model-3d-page',
               name: ScreenNames.model3dPage,
               builder: (context, state) {
+                final name = state.uri.queryParameters['name'] ?? '';
                 final modelAndroid =
                     state.uri.queryParameters['modelAndroid'] ?? '';
                 final modelIos = state.uri.queryParameters['modelIos'] ?? '';
 
                 return Model3dScreen(
+                  name: name,
                   modelAndroid: modelAndroid,
                   modelIos: modelIos,
                 );
