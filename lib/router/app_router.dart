@@ -18,6 +18,10 @@ import 'package:renat_crypto_project/features/models_3d/presentation/bloc/models
 import 'package:renat_crypto_project/features/models_3d/presentation/bloc/models_3d_event.dart';
 import 'package:renat_crypto_project/features/models_3d/presentation/ui/screens/model_3d_screen.dart';
 import 'package:renat_crypto_project/features/models_3d/presentation/ui/screens/models_3d_screen.dart';
+import 'package:renat_crypto_project/features/models_3d_new/data/repository/models_3d_new_repository.dart';
+import 'package:renat_crypto_project/features/models_3d_new/presentation/bloc/models_3d_new_bloc.dart';
+import 'package:renat_crypto_project/features/models_3d_new/presentation/bloc/models_3d_new_event.dart';
+import 'package:renat_crypto_project/features/models_3d_new/presentation/ui/screens/models_3d_new_screen.dart';
 import 'package:renat_crypto_project/router/page_names.dart';
 
 final router = GoRouter(
@@ -84,6 +88,16 @@ final router = GoRouter(
               },
             ),
           ],
+        ),
+        GoRoute(
+          path: 'models-3d-new-page',
+          name: ScreenNames.models3dNewPage,
+          builder: (context, state) => BlocProvider(
+            create: (context) =>
+                Models3dNewBloc(getIt.get<Models3dNewRepository>())
+                  ..add(Models3dNewEventLoad()),
+            child: const Models3dNewScreen(),
+          ),
         ),
       ],
     ),
