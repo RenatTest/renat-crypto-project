@@ -76,13 +76,12 @@ class HomePage extends StatelessWidget {
 }
 
 void _showDialog(BuildContext context) {
+  final formKey = GlobalKey<FormState>();
+  final codeController = TextEditingController();
+  var code = '';
   showDialog<void>(
     context: context,
     builder: (context) {
-      final formKey = GlobalKey<FormState>();
-      final codeController = TextEditingController();
-      var code = '';
-
       return Dialog(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
@@ -107,9 +106,10 @@ void _showDialog(BuildContext context) {
                       if (value == null || value.isEmpty) {
                         return 'Code cannot be empty';
                       }
-                      return value.length > 10
-                          ? null
-                          : 'Please enter a correct code';
+                      if (value.length < 10) {
+                        return 'Invalid code';
+                      }
+                      return null;
                     },
                     builder: (FormFieldState<String> field) {
                       return Column(
@@ -122,6 +122,8 @@ void _showDialog(BuildContext context) {
                               code = codeValue;
                             },
                             style: const TextStyle(color: Colors.white),
+                            obscureText: true,
+                            autofocus: true,
                             decoration: InputDecoration(
                               labelText: 'Enter code',
                               labelStyle: const TextStyle(color: Colors.white),
