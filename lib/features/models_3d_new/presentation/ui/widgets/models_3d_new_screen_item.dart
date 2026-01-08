@@ -1,10 +1,21 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:renat_crypto_project/router/page_names.dart';
 
 class Models3dNewScreenItem extends StatelessWidget {
-  const Models3dNewScreenItem({required this.image, super.key});
+  const Models3dNewScreenItem({
+    required this.modelAndroid,
+    required this.modelIos,
+    required this.name,
+    required this.image,
+    super.key,
+  });
 
   final String image;
+  final String name;
+  final String modelAndroid;
+  final String modelIos;
 
   @override
   Widget build(BuildContext context) {
@@ -15,14 +26,14 @@ class Models3dNewScreenItem extends StatelessWidget {
         width: 250,
         child: GestureDetector(
           behavior: HitTestBehavior.opaque,
-          // onTap: () => context.goNamed(
-          //   ScreenNames.model3dPage,
-          //   queryParameters: {
-          //     'name': name,
-          //     'modelAndroid': modelAndroid,
-          //     'modelIos': modelIos,
-          //   },
-          // ),
+          onTap: () => context.goNamed(
+            ScreenNames.model3dNewPage,
+            queryParameters: {
+              'name': name,
+              'modelAndroid': modelAndroid,
+              'modelIos': modelIos,
+            },
+          ),
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),

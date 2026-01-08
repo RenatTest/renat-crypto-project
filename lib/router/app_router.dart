@@ -92,12 +92,34 @@ final router = GoRouter(
         GoRoute(
           path: 'models-3d-new-page',
           name: ScreenNames.models3dNewPage,
-          builder: (context, state) => BlocProvider(
-            create: (context) =>
-                Models3dNewBloc(getIt.get<Models3dNewRepository>())
-                  ..add(Models3dNewEventLoad()),
-            child: const Models3dNewScreen(),
-          ),
+          builder: (context, state) {
+            final token = state.extra.toString();
+            return BlocProvider(
+              create: (context) => Models3dNewBloc(
+                getIt.get<Models3dNewRepository>(),
+                token: token,
+              )..add(Models3dNewEventLoad()),
+              child: const Models3dNewScreen(),
+            );
+          },
+          routes: [
+            GoRoute(
+              path: 'model-3d-new-page',
+              name: ScreenNames.model3dNewPage,
+              builder: (context, state) {
+                final name = state.uri.queryParameters['name'] ?? '';
+                final modelAndroid =
+                    state.uri.queryParameters['modelAndroid'] ?? '';
+                final modelIos = state.uri.queryParameters['modelIos'] ?? '';
+
+                return Model3dScreen(
+                  name: name,
+                  modelAndroid: modelAndroid,
+                  modelIos: modelIos,
+                );
+              },
+            ),
+          ],
         ),
       ],
     ),

@@ -68,8 +68,22 @@ class Models3dNewScreen extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final gif =
                         state.models3dNew.models3dNewList.items[index].gif;
+                    final name =
+                        state.models3dNew.models3dNewList.items[index].name;
+                    final modelAndroid = state
+                        .models3dNew
+                        .models3dNewList
+                        .items[index]
+                        .modelAndroid;
+                    final modelIos =
+                        state.models3dNew.models3dNewList.items[index].modelIos;
 
-                    return Models3dNewScreenItem(image: gif);
+                    return Models3dNewScreenItem(
+                      image: gif,
+                      name: name,
+                      modelAndroid: modelAndroid,
+                      modelIos: modelIos,
+                    );
                   },
                 ),
               );

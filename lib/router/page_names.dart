@@ -7,4 +7,5 @@ abstract class ScreenNames {
   static const model3dPage = 'model-3d-page';
 
   static const models3dNewPage = 'models-3d-new-page';
+  static const model3dNewPage = 'model-3d-new-page';
 }

@@ -13,6 +13,14 @@ class Models3dNewEntity {
                     gif: item.gifUa != null || item.gifUa != ''
                         ? 'https://generation-admin.freegen.games/api/file/downloadFile/${item.gifUa}'
                         : '',
+                    name: item.titleUa ?? '',
+                    modelAndroid:
+                        item.fileNameUa != null || item.fileNameUa != ''
+                        ? 'https://generation-admin.freegen.games/api/file/downloadFile/${item.fileNameUa}'
+                        : '',
+                    modelIos: item.usdzUa != null || item.usdzUa != ''
+                        ? 'https://generation-admin.freegen.games/api/file/downloadFile/${item.usdzUa}'
+                        : '',
                   ),
                 )
                 .toList() ??
@@ -25,9 +33,18 @@ class Models3dNewEntity {
 }
 
 class Models3dNewEntityItem {
-  const Models3dNewEntityItem({required this.id, required this.gif});
+  const Models3dNewEntityItem({
+    required this.name,
+    required this.id,
+    required this.gif,
+    required this.modelAndroid,
+    required this.modelIos,
+  });
   final String id;
   final String gif;
+  final String name;
+  final String modelAndroid;
+  final String modelIos;
 }
 
 class Models3dNewEntityItemList {
