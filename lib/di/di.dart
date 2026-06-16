@@ -3,12 +3,18 @@ import 'package:get_it/get_it.dart';
 import 'package:renat_crypto_project/core/network/crypto_exchanges_api/firebase/crypto_exchanges_firebase_api.dart';
 import 'package:renat_crypto_project/core/network/crypto_list_api/retrofit/crypto_list_retrofit_api.dart';
 import 'package:renat_crypto_project/core/network/crypto_resources_api/firebase/crypto_resources_firebase_api.dart';
+import 'package:renat_crypto_project/core/network/models_3d/firebase/models_3d_firebase_api.dart';
+import 'package:renat_crypto_project/core/network/models_3d_new/retrofit/models_3d_new_retrofit_api.dart';
 import 'package:renat_crypto_project/features/crypto_exchanges/data/data_source/crypto_exchanges_data_source.dart';
 import 'package:renat_crypto_project/features/crypto_exchanges/data/repository/crypto_exchanges_repository.dart';
 import 'package:renat_crypto_project/features/crypto_list/data/data_source/crypto_list_data_source.dart';
 import 'package:renat_crypto_project/features/crypto_list/data/repository/crypto_list_repository.dart';
 import 'package:renat_crypto_project/features/crypto_resources/data/data_source/crypto_resources_data_source.dart';
 import 'package:renat_crypto_project/features/crypto_resources/data/repository/crypto_resources_repository.dart';
+import 'package:renat_crypto_project/features/models_3d/data/data_source/models_3d_data_source.dart';
+import 'package:renat_crypto_project/features/models_3d/data/repository/models_3d_repository.dart';
+import 'package:renat_crypto_project/features/models_3d_new/data/data_source/models_3d_new_data_source.dart';
+import 'package:renat_crypto_project/features/models_3d_new/data/repository/models_3d_new_repository.dart';
 
 final getIt = GetIt.instance;
 
@@ -16,6 +22,8 @@ void initDI() {
   _registerCryptoListRepository();
   _registerCryptoResourcesRepository();
   _registerCryptoExchangesRepository();
+  _registerModels3dRepository();
+  _registerModels3dNewRepository();
 }
 
 void _registerCryptoListRepository() {
@@ -41,6 +49,20 @@ void _registerCryptoExchangesRepository() {
   getIt.registerLazySingleton<CryptoExchangesRepository>(
     () => CryptoExchangesRepositoryImpl(
       CryptoExchangesDataSourceImpl(CryptoExchangesFirebaseApi()),
+    ),
+  );
+}
+
+void _registerModels3dRepository() {
+  getIt.registerLazySingleton<Models3dRepository>(
+    () => Models3dRepositoryImpl(Models3dDataSourceImpl(Models3dFirebaseApi())),
+  );
+}
+
+void _registerModels3dNewRepository() {
+  getIt.registerLazySingleton<Models3dNewRepository>(
+    () => Models3dNewRepositoryImpl(
+      Models3dNewDataSourceImpl(Models3dNewRetrofitApiImpl(Dio())),
     ),
   );
 }

@@ -1,0 +1,9 @@
+{
+  "files.exclude": {
+    "**/build": true
+  },
+  "search.exclude": {
+    "**/build": true
+  },
+  "dart.analysisExcludedFolders": ["build", "ios/Flutter/ephemeral"]
+}

@@ -13,6 +13,15 @@ import 'package:renat_crypto_project/features/crypto_resources/presentation/bloc
 import 'package:renat_crypto_project/features/crypto_resources/presentation/bloc/crypto_resources_event.dart';
 import 'package:renat_crypto_project/features/crypto_resources/presentation/ui/screens/crypto_resources_page.dart';
 import 'package:renat_crypto_project/features/home_page/presentation/ui/screens/home_page.dart';
+import 'package:renat_crypto_project/features/models_3d/data/repository/models_3d_repository.dart';
+import 'package:renat_crypto_project/features/models_3d/presentation/bloc/models_3d_bloc.dart';
+import 'package:renat_crypto_project/features/models_3d/presentation/bloc/models_3d_event.dart';
+import 'package:renat_crypto_project/features/models_3d/presentation/ui/screens/model_3d_screen.dart';
+import 'package:renat_crypto_project/features/models_3d/presentation/ui/screens/models_3d_screen.dart';
+import 'package:renat_crypto_project/features/models_3d_new/data/repository/models_3d_new_repository.dart';
+import 'package:renat_crypto_project/features/models_3d_new/presentation/bloc/models_3d_new_bloc.dart';
+import 'package:renat_crypto_project/features/models_3d_new/presentation/bloc/models_3d_new_event.dart';
+import 'package:renat_crypto_project/features/models_3d_new/presentation/ui/screens/models_3d_new_screen.dart';
 import 'package:renat_crypto_project/router/page_names.dart';
 
 final router = GoRouter(
@@ -51,6 +60,66 @@ final router = GoRouter(
                   ..add(CryptoExchangesEventLoaded()),
             child: const CryptoExchangesPage(),
           ),
+        ),
+        GoRoute(
+          path: 'models-3d-page',
+          name: ScreenNames.models3dPage,
+          builder: (context, state) => BlocProvider(
+            create: (context) =>
+                Models3dBloc(getIt.get<Models3dRepository>())
+                  ..add(Models3dEventLoad()),
+            child: const Models3dScreen(),
+          ),
+          routes: [
+            GoRoute(
+              path: 'model-3d-page',
+              name: ScreenNames.model3dPage,
+              builder: (context, state) {
+                final name = state.uri.queryParameters['name'] ?? '';
+                final modelAndroid =
+                    state.uri.queryParameters['modelAndroid'] ?? '';
+                final modelIos = state.uri.queryParameters['modelIos'] ?? '';
+
+                return Model3dScreen(
+                  name: name,
+                  modelAndroid: modelAndroid,
+                  modelIos: modelIos,
+                );
+              },
+            ),
+          ],
+        ),
+        GoRoute(
+          path: 'models-3d-new-page',
+          name: ScreenNames.models3dNewPage,
+          builder: (context, state) {
+            final token = state.extra.toString();
+            return BlocProvider(
+              create: (context) => Models3dNewBloc(
+                getIt.get<Models3dNewRepository>(),
+                token: token,
+              )..add(Models3dNewEventLoad()),
+              child: const Models3dNewScreen(),
+            );
+          },
+          routes: [
+            GoRoute(
+              path: 'model-3d-new-page',
+              name: ScreenNames.model3dNewPage,
+              builder: (context, state) {
+                final name = state.uri.queryParameters['name'] ?? '';
+                final modelAndroid =
+                    state.uri.queryParameters['modelAndroid'] ?? '';
+                final modelIos = state.uri.queryParameters['modelIos'] ?? '';
+
+                return Model3dScreen(
+                  name: name,
+                  modelAndroid: modelAndroid,
+                  modelIos: modelIos,
+                );
+              },
+            ),
+          ],
         ),
       ],
     ),

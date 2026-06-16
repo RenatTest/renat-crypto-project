@@ -58,6 +58,14 @@ class HomePage extends StatelessWidget {
                   onPressed: () =>
                       context.goNamed(ScreenNames.cryptoExchangesPage),
                 ),
+                HomePageButton(
+                  buttonText: '3d models',
+                  onPressed: () => context.goNamed(ScreenNames.models3dPage),
+                ),
+                HomePageButton(
+                  buttonText: '3d models new',
+                  onPressed: () => _showDialog(context),
+                ),
               ],
             );
           },
@@ -65,4 +73,120 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
+}
+
+void _showDialog(BuildContext context) {
+  final formKey = GlobalKey<FormState>();
+  final codeController = TextEditingController();
+  var code = '';
+  showDialog<void>(
+    context: context,
+    builder: (context) {
+      return Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+          side: const BorderSide(width: 2.0, color: Colors.white),
+        ),
+        child: Container(
+          width: 220,
+          height: 220,
+          decoration: BoxDecoration(color: Colors.black),
+          child: Form(
+            key: formKey,
+            child: Padding(
+              padding: EdgeInsets.all(20),
+              child: Column(
+                spacing: 20,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(Icons.lock, color: Colors.white),
+                  FormField<String>(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Code cannot be empty';
+                      }
+                      if (value.length < 10) {
+                        return 'Invalid code';
+                      }
+                      return null;
+                    },
+                    builder: (FormFieldState<String> field) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          TextField(
+                            controller: codeController,
+                            onChanged: (codeValue) {
+                              field.didChange(codeValue);
+                              code = codeValue;
+                            },
+                            style: const TextStyle(color: Colors.white),
+                            obscureText: true,
+                            autofocus: true,
+                            decoration: InputDecoration(
+                              labelText: 'Enter code',
+                              labelStyle: const TextStyle(color: Colors.white),
+                              hintText: 'Enter code',
+                              hintStyle: const TextStyle(color: Colors.white70),
+                              filled: true,
+                              fillColor: Colors.transparent,
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: const BorderSide(
+                                  color: Colors.white,
+                                  width: 2.0,
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: const BorderSide(
+                                  color: Colors.white,
+                                  width: 2.0,
+                                ),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: const BorderSide(
+                                  color: Colors.red,
+                                  width: 2.0,
+                                ),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: const BorderSide(
+                                  color: Colors.red,
+                                  width: 2.0,
+                                ),
+                              ),
+
+                              errorText: field.errorText,
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+
+                  HomePageButton(
+                    buttonText: 'Enter code',
+                    onPressed: () {
+                      if (formKey.currentState!.validate()) {
+                        context
+                          ..pop()
+                          ..goNamed(ScreenNames.models3dNewPage, extra: code);
+
+                        codeController.clear();
+                        code = '';
+                      }
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    },
+  );
 }
