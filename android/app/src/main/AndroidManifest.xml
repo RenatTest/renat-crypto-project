@@ -3,7 +3,6 @@
         android:label="renat_crypto_project"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
-        android:label="example"
         android:usesCleartextTraffic="true"
         >
         <activity
