@@ -7,18 +7,14 @@ import 'package:retrofit/retrofit.dart';
 
 part 'crypto_list_retrofit_api.g.dart';
 
-@RestApi(baseUrl: 'https://min-api.cryptocompare.com')
+@RestApi(baseUrl: 'https://api.coingecko.com')
 abstract class CryptoListApiImplRetrofit implements CryptoListApi {
   factory CryptoListApiImplRetrofit(Dio dio, {String baseUrl}) =
       _CryptoListApiImplRetrofit;
 
   @override
-  @GET('/data/pricemultifull')
-  Future<CryptoListDto> getCryptoList({
-    // @Query('fsyms') String? fsyms = 'BTC,ETH,BNB,HMSTR,TON,DOGE,USDT,SOL',
-    @Query('fsyms')
-    String? fsyms =
-        'BTC,ETH,TON,USDT,BNB,SOL,XRP,ADA,DOGE,DOT,MATIC,TRX,LTC,AVAX,SHIB,WBTC,LINK,UNI,BUSD,ICP,NEAR,HBAR,APE,FTM,XLM,VET,SAND,EOS,FIL,CHZ,AXS',
-    @Query('tsyms') String? tsyms = 'USD',
+  @GET('/api/v3/coins/markets')
+  Future<List<CryptoListDto>> getCryptoList({
+    @Query('vs_currency') String? tsyms = 'usd',
   });
 }

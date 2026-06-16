@@ -29,7 +29,7 @@ class CryptoCoinCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Row(
-              spacing: 5,
+              spacing: 10,
               children: [
                 Image.network(height: 70, coinImage),
                 Column(

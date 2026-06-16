@@ -1,23 +1,26 @@
-import 'dart:convert';
 // ignore: depend_on_referenced_packages
+import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:renat_crypto_project/core/network/crypto_list_api/crypto_list_api_base.dart';
 import 'package:renat_crypto_project/features/crypto_list/data/data_source/models/crypto_list_dto/crypto_list_dto/crypto_list_dto.dart';
 
 class CryptoListApiImpl implements CryptoListApi {
   @override
-  Future<CryptoListDto> getCryptoList() async {
+  Future<List<CryptoListDto>> getCryptoList() async {
     try {
       final response = await http.get(
         Uri.parse(
-          'https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,BNB,HMSTR,TON,DOGE,USDT,SOL&tsyms=USD',
+          'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd',
         ),
       );
 
       if (response.statusCode == 200) {
-        final jsonCryptoList =
-            json.decode(response.body) as Map<String, dynamic>;
-        final cryptoListData = CryptoListDto.fromJson(jsonCryptoList);
+        final jsonCryptoList = json.decode(response.body) as List<dynamic>;
+
+        final cryptoListData = jsonCryptoList
+            .map((item) => CryptoListDto.fromJson(item as Map<String, dynamic>))
+            .toList();
+
         return cryptoListData;
       } else {
         throw Exception(

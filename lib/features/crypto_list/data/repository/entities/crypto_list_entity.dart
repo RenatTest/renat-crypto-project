@@ -3,15 +3,14 @@ import 'package:renat_crypto_project/features/crypto_list/data/data_source/model
 class CryptoListEntity {
   const CryptoListEntity({required this.cryptoList});
 
-  factory CryptoListEntity.fromDTO(CryptoListDto dto) {
+  factory CryptoListEntity.fromDto(List<CryptoListDto> dto) {
     return CryptoListEntity(
-      cryptoList: dto.raw?.entries.map((item) {
+      cryptoList: dto.map((item) {
         return {
-          'coin': item.value.usd?.fromsymbol,
-          'price': item.value.usd?.price,
-          'priceOpen24Hour': item.value.usd?.open24Hour,
-          'coinImage':
-              'https://www.cryptocompare.com/${item.value.usd?.imageurl}',
+          'coin': item.symbol?.toUpperCase(),
+          'price': item.currentPrice,
+          'priceChange': item.priceChangePercentage24h,
+          'coinImage': item.image,
         };
       }).toList(),
     );

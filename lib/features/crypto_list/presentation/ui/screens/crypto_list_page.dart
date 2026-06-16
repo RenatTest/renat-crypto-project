@@ -69,7 +69,7 @@ class CryptoListPage extends StatelessWidget {
 
                               final price =
                                   state.cryptoList?.cryptoList?[index]['price']
-                                      .toStringAsFixed(5)
+                                      .toStringAsFixed(2)
                                       .toString() ??
                                   '0';
 
@@ -80,23 +80,20 @@ class CryptoListPage extends StatelessWidget {
                                       .toString() ??
                                   'Coin image';
 
-                              final changePrice =
-                                  (((state.cryptoList?.cryptoList?[index]['price'] -
-                                                  state
-                                                      .cryptoList
-                                                      ?.cryptoList?[index]['priceOpen24Hour']) /
-                                              state
-                                                  .cryptoList
-                                                  ?.cryptoList?[index]['priceOpen24Hour']) *
-                                          100)
-                                      .toStringAsFixed(2)
-                                      .toString();
+                              final priceChange =
+                                  state
+                                          .cryptoList
+                                          ?.cryptoList?[index]['priceChange']
+                                      as num?;
+
+                              final coinChange =
+                                  priceChange?.toStringAsFixed(2) ?? '0';
 
                               return CryptoCoinCard(
                                 coinName: coin,
                                 coinPrice: price,
                                 coinImage: image,
-                                coinChange: changePrice,
+                                coinChange: coinChange,
                               );
                             },
                           ),

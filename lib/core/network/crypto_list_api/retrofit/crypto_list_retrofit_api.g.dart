@@ -12,7 +12,7 @@ part of 'crypto_list_retrofit_api.dart';
 
 class _CryptoListApiImplRetrofit implements CryptoListApiImplRetrofit {
   _CryptoListApiImplRetrofit(this._dio, {this.baseUrl, this.errorLogger}) {
-    baseUrl ??= 'https://min-api.cryptocompare.com';
+    baseUrl ??= 'https://api.coingecko.com';
   }
 
   final Dio _dio;
@@ -22,30 +22,28 @@ class _CryptoListApiImplRetrofit implements CryptoListApiImplRetrofit {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<CryptoListDto> getCryptoList({
-    String? fsyms =
-        'BTC,ETH,TON,USDT,BNB,SOL,XRP,ADA,DOGE,DOT,MATIC,TRX,LTC,AVAX,SHIB,WBTC,LINK,UNI,BUSD,ICP,NEAR,HBAR,APE,FTM,XLM,VET,SAND,EOS,FIL,CHZ,AXS',
-    String? tsyms = 'USD',
-  }) async {
+  Future<List<CryptoListDto>> getCryptoList({String? tsyms = 'usd'}) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'fsyms': fsyms, r'tsyms': tsyms};
+    final queryParameters = <String, dynamic>{r'vs_currency': tsyms};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<CryptoListDto>(
+    final _options = _setStreamType<List<CryptoListDto>>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/data/pricemultifull',
+            '/api/v3/coins/markets',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late CryptoListDto _value;
+    final _result = await _dio.fetch<List<dynamic>>(_options);
+    late List<CryptoListDto> _value;
     try {
-      _value = CryptoListDto.fromJson(_result.data!);
+      _value = _result.data!
+          .map((dynamic i) => CryptoListDto.fromJson(i as Map<String, dynamic>))
+          .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

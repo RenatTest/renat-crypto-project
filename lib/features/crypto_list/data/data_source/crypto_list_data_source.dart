@@ -2,7 +2,7 @@ import 'package:renat_crypto_project/core/network/crypto_list_api/crypto_list_ap
 import 'package:renat_crypto_project/features/crypto_list/data/data_source/models/crypto_list_dto/crypto_list_dto/crypto_list_dto.dart';
 
 abstract interface class CryptoListDataSource {
-  Future<CryptoListDto> getCryptoList();
+  Future<List<CryptoListDto>> getCryptoList();
 }
 
 class CryptoListDataSourceImpl implements CryptoListDataSource {
@@ -11,7 +11,7 @@ class CryptoListDataSourceImpl implements CryptoListDataSource {
   final CryptoListApi _api;
 
   @override
-  Future<CryptoListDto> getCryptoList() async {
+  Future<List<CryptoListDto>> getCryptoList() async {
     final result = await _api.getCryptoList();
 
     return result;

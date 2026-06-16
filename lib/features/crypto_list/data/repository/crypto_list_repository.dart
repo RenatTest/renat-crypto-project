@@ -14,7 +14,7 @@ class CryptoListRepositoryImpl implements CryptoListRepository {
   Future<CryptoListEntity> getCryptoList() async {
     final response = await dataSource.getCryptoList();
 
-    final cryptoListResult = CryptoListEntity.fromDTO(response);
+    final cryptoListResult = CryptoListEntity.fromDto(response);
 
     return cryptoListResult;
   }
